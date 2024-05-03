@@ -6,17 +6,15 @@ const port = 8000;
 
 http
   .createServer((req, res) => {
-    let filePath = "public" + req.url;
-
     switch (req.url) {
       case "/":
-        filePath = "public/index.html";
+        req.url = "index.html";
         break;
       case "/cars":
-        filePath = "public/car_search.html";
+        req.url = "car_search.html";
         break;
     }
-
+    let filePath = "public/" + req.url;
     // Baca ekstensi file
     const extname = path.extname(filePath);
 

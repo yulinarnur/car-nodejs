@@ -1,50 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- MASTER <-- DEVELOPMENT  -->
-
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Binar Car Rental</title>
 
-    <!-- STYLESHEET -->
-
-    <!-- bootstrap css -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
-    <!-- end of bootstrap css -->
-
-    <!-- bootstrap icon cdn-->
+    <!-- Bootstrap Icons -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
     />
-    <!-- end of bootstrap icon cdn-->
-
-    <!-- my css -->
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/style.css" />
-    <!-- end of my css -->
-
-    <!-- owl carousel CSS -->
+    <!-- Bootstrap Select CSS -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
-      integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
-      crossorigin="anonymous"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css"
     />
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
-      integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
-      crossorigin="anonymous"
-    />
-    <!--  end of owl carousel css-->
-    <!-- aos animation css-->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <!-- end of aos animation css-->
-
-    <!-- END OF STYLESHEET -->
   </head>
 
   <body>
@@ -162,12 +137,11 @@
             <div class="col-12 col-md-3 mb-lg-0 d-flex flex-column">
               <label for="driverType" class="form-label">Tipe Driver</label>
               <div class="input-group">
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>Open this select menu</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
+                <select
+                  id="driverType"
+                  name="driverType"
+                  class="selectpicker"
+                ></select>
               </div>
             </div>
 
@@ -175,7 +149,7 @@
               <label for="date" class="form-label">Tanggal</label>
               <div class="input-group">
                 <input
-                  type="date"
+                  type="text"
                   class="form-control datepicker"
                   id="date"
                   name="date"
@@ -187,33 +161,33 @@
             <div class="col-12 col-md-3 mb-lg-0 d-flex flex-column">
               <label for="time" class="form-label">Waktu Jemput/Ambil</label>
               <div class="input-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="time"
-                  name="time"
-                  placeholder="Pilih waktu"
-                />
+                <select name="time" id="time" class="form-select"></select>
               </div>
             </div>
 
             <div class="col-12 col-md-3 mb-lg-0 d-flex flex-column">
-              <label for="total" class="form-label"
+              <label for="totalPassenger" class="form-label"
                 >Jumlah Penumpang (optional)</label
               >
               <div class="input-group">
                 <input
                   type="number"
                   class="form-control"
-                  id="total"
-                  name="total"
+                  id="totalPassenger"
+                  name="totalPassenger"
+                  aria-describedby="basic-addon1"
                   placeholder="Jumlah Penumpang"
                 />
-                <button class="btn btn-success ms-2">Cari Mobil</button>
+                <button class="btn btn-success submit ms-2">Cari Mobil</button>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Section cars -->
+        <section class="section-cars d-flex justify-content-center mt-5">
+          <div class="insert-card-cars row px-4"></div>
+        </section>
       </div>
     </section>
 
@@ -282,31 +256,46 @@
     <!-- end of footer -->
 
     <!-- JS SCRIPT -->
-
-    <!-- jquery -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
       referrerpolicy="no-referrer"
     ></script>
-    <!-- end of jquery -->
-
-    <!-- bootstrap js -->
     <script src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- end of bootstrap js -->
-
-    <!-- owl carousel -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <!-- end of owl carousel -->
-
-    <!-- aos animation -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init();
-    </script>
-    <!-- end of aos animation -->
-
-    <!-- end of my js -->
+    <!-- Bootstrap Select JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script>
+    <!-- Custom JS -->
     <script src="js/script.js"></script>
-    <!-- end of my js -->
+
+    <script>
+      $(document).ready(function () {
+        // Inisialisasi dropdown driverType
+        $("#driverType").selectpicker({
+          title: "Pilih Tipe Driver",
+        });
+
+        // Menambahkan opsi dropdown menggunakan JavaScript
+        var driverOptions = [
+          { value: "Dengan Driver", text: "Dengan Driver" },
+          { value: "Tanpa Driver", text: "Tanpa Driver" },
+        ];
+
+        var driverSelect = $("#driverType");
+        $.each(driverOptions, function (index, option) {
+          driverSelect.append(
+            $("<option>").val(option.value).text(option.text)
+          );
+        });
+
+        // Memperbarui dropdown driverType
+        driverSelect.selectpicker("refresh");
+      });
+    </script>
+    <!-- Custom JS -->
+    <script src="scripts/Component.js"></script>
+    <script src="scripts/Car.js"></script>
+    <script src="scripts/App.js"></script>
+    <!-- <script src="js/script.js"></script> -->
+    <!-- <img src="../data/car01.min.jpg"></img> -->
+    <script src="scripts/main.js"></script>
   </body>
 </html>
