@@ -11,7 +11,12 @@
     <!-- STYLESHEET -->
 
     <!-- bootstrap css -->
-    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
     <!-- end of bootstrap css -->
 
     <!-- bootstrap icon cdn-->
@@ -129,7 +134,7 @@
           class="hero-left col-md-6 p-0 d-flex flex-column justify-content-center px-2"
         >
           <h1 class="fw-bold text-capitalize">
-            Sewa & Rental Mobil Terbaik di Kawasan Malang
+            Sewa & Rental Mobil Terbaik di Kawasan Jember
           </h1>
           <p class="fw-light mr-auto">
             Selamat datang di Binar Car Rental. Kami menyediakan mobil kualitas
@@ -459,7 +464,7 @@
         class="container lg cta-banner mx-auto text-center d-flex flex-column high-shadow"
       >
         <div>
-          <h1 class="fw-bold">Sewa Mobil di Malang Sekarang</h1>
+          <h1 class="fw-bold">Sewa Mobil di Jember Sekarang</h1>
           <p class="py-4">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod <br />
@@ -701,7 +706,11 @@
     <!-- end of jquery -->
 
     <!-- bootstrap js -->
-    <script src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
     <!-- end of bootstrap js -->
 
     <!-- owl carousel -->
@@ -718,5 +727,14 @@
     <!-- end of my js -->
     <script src="js/owlCarousel.js"></script>
     <!-- end of my js -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const btnMulaiSewaMobil = document.querySelector(".btn-cta");
+
+        btnMulaiSewaMobil.addEventListener("click", function () {
+          window.location.href = "/cars";
+        });
+      });
+    </script>
   </body>
 </html>

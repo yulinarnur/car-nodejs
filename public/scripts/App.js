@@ -1,65 +1,78 @@
-async function getCarsData() {
-  try {
-    const response = await fetch("../cars.json");
-    if (!response.ok) {
-      throw new Error("Failed to fetch cars data");
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching car data:", error);
-    return null;
-  }
-}
-
 class App {
   constructor() {
-    this.init();
+    this.formSearch = document.getElementById("search-form");
+    this.insertCardCar = document.getElementById("insert-car");
+    this.btnSearch = document.getElementById("btn-search");
+    this.driverType = document.getElementById("driverType");
+    this.totalPassanger = document.getElementById("totalPassanger");
+    this.carInstances = [];
+    this.btnSearch.onclick = this.click.bind(this);
+
+    if (!this.insertCardCar) {
+      console.error("Elemen dengan ID 'insert-car' tidak ditemukan!");
+    }
   }
 
   async init() {
-    // Panggil method untuk menambahkan event listener ke tombol "Cari Mobil"
-    this.addSearchButtonListener();
+    this.formSearch.addEventListener("submit", (e) => this.getCar(e));
   }
 
-  addSearchButtonListener() {
-    const searchButton = document.querySelector(".submit");
-    searchButton.addEventListener("click", this.searchCars.bind(this));
-  }
+  async getCar(e) {
+    e.preventDefault();
+    try {
+      if (this.carInstances.length === 0) {
+        const response = await fetch(
+          "https://raw.githubusercontent.com/fnurhidayat/probable-garbanzo/main/data/cars.min.json"
+        );
 
-  async searchCars() {
-    // Dapatkan nilai input dari form pencarian
-    const driverType = document.getElementById("driverType").value;
-    const date = document.getElementById("date").value;
-    const time = document.getElementById("time").value;
-    const totalPassenger = document.getElementById("totalPassenger").value;
+        const cars = await response.json();
 
-    // Lakukan permintaan HTTP GET untuk mengambil data mobil
-    const data = await getCarsData();
-
-    // Jika data berhasil diambil, lanjutkan proses
-    if (data) {
-      // Inisialisasikan objek Car untuk setiap mobil yang ditemukan
-      Car.init(data);
-
-      // Render hasil pencarian ke dalam DOM
-      this.renderCars();
+        cars.forEach((car) => {
+          const carInstance = new Car(car);
+          this.carInstances.push(carInstance);
+        });
+      }
+      this.addFilterCar();
+    } catch (error) {
+      console.error("Error fetching cars:", error);
     }
   }
 
-  renderCars() {
-    // Dapatkan container tempat untuk menampilkan daftar mobil
-    const carsContainer = document.querySelector(".insert-card-cars");
+  addFilterCar() {
+    const available = this.driverType.value === "true";
+    const capacity = this.totalPassanger.value
+      ? parseInt(this.totalPassanger.value)
+      : 0;
 
-    // Bersihkan konten sebelumnya
-    carsContainer.innerHTML = "";
+    const filteredCars = this.carInstances.filter(
+      (car) => car.available === available && car.capacity >= capacity
+    );
 
-    // Render setiap mobil ke dalam DOM
-    Car.list.forEach((car) => {
-      carsContainer.innerHTML += car.render();
-    });
+    this.cardRender(filteredCars);
+  }
+
+  click(e) {
+    this.getCar(e);
+  }
+
+  cardRender(cars) {
+    let card = "";
+    if (cars.length === 0) {
+      card = `<div class="alert alert-danger d-flex align-items-center" role="alert">
+                  <div class="text-center">
+                      Mobil Tidak Ditemukan
+                  </div>
+              </div>`;
+    } else {
+      cars.forEach((car) => {
+        card += car.render();
+      });
+    }
+    this.insertCardCar.innerHTML = card;
   }
 }
 
-// Inisialisasikan aplikasi
-const app = new App();
+document.addEventListener("DOMContentLoaded", () => {
+  const app = new App();
+  app.init();
+});

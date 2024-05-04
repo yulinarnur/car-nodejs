@@ -52,14 +52,14 @@ class Car extends Component {
                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem ipsam magni fugit repellendus fugiat dolorem dignissimos nam consequuntur.</p>
             </div>
 
-            <div class="spec-cars">
-                <div class="spec-detail d-flex justify-content-start">
+            <div class="specifications">
+                <div class="specifications d-flex justify-content-start">
                     <p class="align-self-center mb-0">${this.capacity} orang</p>
                 </div>
-                <div class="spec-detail d-flex justify-content-start">
+                <div class="specifications d-flex justify-content-start">
                     <p class="align-self-center mb-0">${this.transmission} orang</p>
                 </div>
-                <div class="spec-detail d-flex justify-content-start">
+                <div class="specifications d-flex justify-content-start">
                     <p class="align-self-center mb-0">${this.year} orang</p>
                 </div>
             </div>

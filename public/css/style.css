@@ -39,7 +39,14 @@ body {
   margin: none;
   font-family: helvetica, arial;
 }
-
+.cars-img {
+  object-fit: cover;
+  width: 285px;
+  height: 222px;
+}
+.choose-cars {
+  background-color: #5cb85f;
+}
 /* modifier */
 
 .low-shadow {
@@ -66,6 +73,9 @@ body {
 /* component styles */
 /* header style */
 header {
+  background-color: var(--darkblue-01);
+}
+nav {
   background-color: var(--darkblue-01);
 }
 
